@@ -17,7 +17,8 @@ const CustomNavbar = () => {
 
         <Nav className="d-flex align-items-center gap-2">
           <Link to="/" className="btn btn-sm btn-outline-warning">🍕 Home</Link>
-          <Link to="/pizza/p001" className="btn btn-sm btn-outline-warning">🍕 Pizza</Link>
+          <Link to="/pizza/p001" className="btn btn-sm btn-outline-warning"> Computadores</Link>
+          <Link to="/pizza/p001" className="btn btn-sm btn-outline-warning"> Computadores</Link>
           <Link to="/cart" className="btn btn-sm btn-outline-warning">🛒 Carrito</Link>
           <Link to="/notfound" className="btn btn-sm btn-outline-warning">❌ NotFound</Link>
           {user.isAuthenticated ? (
