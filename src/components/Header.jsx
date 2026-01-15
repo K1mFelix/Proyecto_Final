@@ -1,5 +1,6 @@
 import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
 import { Cart, Person } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
 
@@ -32,12 +33,16 @@ const Header = () => {
 
       {/* ICONOS */}
       <Nav className="header-icons">
-        <Nav.Link href="#">
+        {/*LOGIN*/}
+        <Nav.Link as={Link} to="/login">
           <Person size={30} />
-          <span>Hola!<br />Inicia sesión</span>
+          <span>
+            Hola!<br />Inicia sesión
+          </span>
         </Nav.Link>
 
-        <Nav.Link href="#">
+        {/* CARRITO */}
+        <Nav.Link as={Link} to="/cart">
           <Cart size={30} />
         </Nav.Link>
       </Nav>
