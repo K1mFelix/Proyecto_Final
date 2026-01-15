@@ -1,72 +1,110 @@
-import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
-import { Cart, Person } from "react-bootstrap-icons";
+import { useState } from "react";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Form,
+  FormControl,
+  Button,
+  Badge,
+} from "react-bootstrap";
+import { Cart, Person, Search } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
-
 const Header = () => {
+  const [darkMode, setDarkMode] = useState(true);
+  const [cartCount] = useState(0);
+
   return (
-   <>
+    <>
+      {/* TOP BAR */}
+      <div className={`top-bar ${darkMode ? "dark" : "light"}`}>
+        <span>¡Retira GRATIS tus compras en nuestra tienda!</span>
 
-  {/* TOP BAR */}
-  <div className="top-bar">
-    ¡Retira GRATIS tus compras en nuestra tienda! Además, aprovecha productos con despacho gratis
-  </div>
+        <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ? "🌙" : "☀️"}
+        </button>
+      </div>
 
-  {/* HEADER PRINCIPAL */}
-  <Navbar className="main-header" variant="dark">
-    <Container fluid className="px-4">
+      {/* HEADER PRINCIPAL */}
+      <header className={`header-wrapper ${darkMode ? "dark" : "light"}`}>
+        <div className="header-inner">
+          {/* LOGO */}
+          <Link to="/" className="logo">
+            <strong>hipermundo</strong> 🍩
+          </Link>
 
-      {/* LOGO */}
-      <Navbar.Brand href="#">
-        <strong>hipermundo</strong>ipermegared🍩
-      </Navbar.Brand>
+          {/* SEARCH */}
+          <Form className="search-bar desktop-only">
+           {/*}  <FormControl
+              type="search"
+              placeholder="Busca los mejores productos y marcas :)"
+            />
+            <Button variant="primary">
+              <Search />
+            </Button>*/}
+          </Form>
 
-      {/* BUSCADOR */}
-      <Form className="d-flex flex-grow-1 mx-4 search-form">
-        <FormControl
-          type="search"
-          placeholder="Busca los mejores productos y marcas :)"
-        />
-        <Button>🔍</Button>
-      </Form>
+          {/* ACTIONS */}
+          <Nav className="header-actions">
+            {/* LOGIN */}
+            <Nav.Link as={Link} to="/login" className="header-action">
+              <Person size={26} />
+              <div className="user-text desktop-only">
+                <small>Hola!</small>
+                <strong>Inicia sesión</strong>
+              </div>
+            </Nav.Link>
 
-      {/* ICONOS */}
-      <Nav className="header-icons">
-        {/*LOGIN*/}
-        <Nav.Link as={Link} to="/login">
-          <Person size={30} />
-          <span>
-            Hola!<br />Inicia sesión
-          </span>
-        </Nav.Link>
+            {/* CART */}
+            <Nav.Link
+              as={Link}
+              to="/cart"
+              className="header-action position-relative"
+            >
+              <Cart size={26} />
+              {cartCount > 0 && (
+                <Badge pill bg="danger" className="cart-badge">
+                  {cartCount}
+                </Badge>
+              )}
+            </Nav.Link>
+          </Nav>
+        </div>
+      </header>
 
-        {/* CARRITO */}
-        <Nav.Link as={Link} to="/cart">
-          <Cart size={30} />
-        </Nav.Link>
-      </Nav>
-
-    </Container>
-  </Navbar>
-
-  {/* MENÚ */}
-  <Navbar className="category-menu">
-    <Container fluid className="px-4">
-      <Nav>
-        <Nav.Link>Gaming y Streaming</Nav.Link>
-        <Nav.Link>Computación</Nav.Link>
-        <Nav.Link>Componentes</Nav.Link>
-        <Nav.Link>Conectividad y Redes</Nav.Link>
-        <Nav.Link>Hogar y Oficina</Nav.Link>
-        <Nav.Link>Audio y Video</Nav.Link>
-        <Nav.Link>Otras Categorías</Nav.Link>
-      </Nav>
-    </Container>
-  </Navbar>
-
-</>
-
+      {/* CATEGORY MENU */}
+      <Navbar className="category-menu navbar-expand-md navbar-light">
+        {" "}
+        <Container fluid>
+          {" "}
+          <Nav className="w-100 justify-content-around text-center">
+            {" "}
+            <Nav.Link className="category-item">
+              {" "}
+              🎮 <span className="d-none d-md-inline"> Gaming</span>{" "}
+            </Nav.Link>{" "}
+            <Nav.Link className="category-item">
+              {" "}
+              💻 <span className="d-none d-md-inline"> Computación</span>{" "}
+            </Nav.Link>{" "}
+            <Nav.Link className="category-item">
+              {" "}
+              🧩 <span className="d-none d-md-inline"> Componentes</span>{" "}
+            </Nav.Link>{" "}
+            <Nav.Link className="category-item">
+              {" "}
+              📡 <span className="d-none d-md-inline"> Redes</span>{" "}
+            </Nav.Link>{" "}
+            <Nav.Link className="category-item">
+              {" "}
+              🏠 <span className="d-none d-md-inline"> Hogar</span>{" "}
+            </Nav.Link>{" "}
+          </Nav>
+        </Container>
+      </Navbar>
+    </>
   );
 };
 

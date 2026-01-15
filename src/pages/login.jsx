@@ -1,31 +1,32 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
-function Login() {
-  // Estados para guardar lo que el usuario escribe
+function Login({ onSuccess }) {
+  const navigate = useNavigate();
+
+  // Estados
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Función que se ejecuta al enviar el formulario
+  // Submit
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita que la página se recargue
+    e.preventDefault();
 
-    // Aquí normalmente enviarías los datos al backend
     console.log("Correo:", email);
     console.log("Contraseña:", password);
 
-    alert("Login enviado (demo)");
+    // 👉 aquí iría el login real (API)
+    // Si todo sale bien:
+    onSuccess();
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container modal-mode">
 
-
-      {/* Caja del login */}
       <form className="login-box" onSubmit={handleSubmit}>
         <h2>Bienvenido</h2>
 
-        {/* Input correo */}
         <input
           type="email"
           placeholder="Correo"
@@ -34,7 +35,6 @@ function Login() {
           required
         />
 
-        {/* Input contraseña */}
         <input
           type="password"
           placeholder="Contraseña"
@@ -43,19 +43,18 @@ function Login() {
           required
         />
 
-        {/* Texto de ayuda */}
         <p className="help-text">¿Has olvidado tu contraseña?</p>
 
-        {/* Botón */}
-        <button type="submit">Continue</button>
+        <button type="submit">Continuar</button>
 
-        {/* Registro */}
         <p className="register-text">
-          ¿No tienes cuenta? <span>Regístrate</span>
+          ¿No tienes cuenta?{" "}
+          <span onClick={() => navigate("/register")}>
+            Regístrate
+          </span>
         </p>
       </form>
 
-      {/* Footer */}
       <footer>
         <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
       </footer>
