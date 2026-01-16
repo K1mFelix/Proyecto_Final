@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import "../styles/Register.css";
 
-const Register = () => {
-  // Estados para los inputs
+
+const CreateUser = () => {
+  // Datos del usuario
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("sales");
   const [password, setPassword] = useState("");
 
-  // Controla mostrar/ocultar contraseña
+  // UI
   const [showPassword, setShowPassword] = useState(false);
 
-  // reglas de validación de contraseña
+  // Reglas de contraseña
   const passwordRules = {
     length: password.length >= 8,
     upper: /[A-Z]/.test(password),
@@ -19,58 +20,81 @@ const Register = () => {
     special: /[@$!%*?&#]/.test(password),
   };
 
-  // Envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Verificamos que todas las reglas se cumplan
-    const isValid = Object.values(passwordRules).every(Boolean);
-
-    if (!isValid) {
+    const isValidPassword = Object.values(passwordRules).every(Boolean);
+    if (!isValidPassword) {
       alert("La contraseña no cumple con los requisitos");
       return;
     }
 
-    // Aquí enviarías los datos al backend
-    console.log("Email:", email);
-    console.log("Password:", password);
+    const newUser = {
+      name,
+      email,
+      password,
+      role,
+      active: true,
+      createdAt: new Date().toISOString(),
+    };
 
-    alert("Cuenta creada con éxito (demo)");
+    // Aquí enviarías al backend o context
+    console.log("Usuario creado:", newUser);
+
+    alert("Usuario creado correctamente (demo)");
+
+    // Reset
+    setName("");
+    setEmail("");
+    setPassword("");
+    setRole("sales");
   };
 
   return (
     <div className="register-container">
-      {/* Caja del registro */}
       <form className="register-box" onSubmit={handleSubmit}>
-        <h2>Crea tu Cuenta</h2>
+        <h2>Crear Usuario</h2>
+
+        {/* Nombre */}
+        <input
+          type="text"
+          placeholder="Nombre completo"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
         {/* Email */}
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Correo electrónico"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
+        {/* Rol */}
+        <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="sales">Sales</option>
+          <option value="admin">Admin</option>
+        </select>
+
         {/* Password */}
         <div className="password-field">
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Password"
+            placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <span onClick={() => setShowPassword(!showPassword)}>
-            👁️
-          </span>
+          <span onClick={() => setShowPassword(!showPassword)}>👁️</span>
         </div>
 
         {/* Reglas */}
         <ul className="password-rules">
           <li className={passwordRules.length ? "ok" : "error"}>
-            Al menos 8 caracteres
+            Mínimo 8 caracteres
           </li>
           <li className={passwordRules.upper ? "ok" : "error"}>
             Una mayúscula
@@ -86,21 +110,10 @@ const Register = () => {
           </li>
         </ul>
 
-        {/* Botón */}
-        <button type="submit">Crear Cuenta</button>
-
-        {/* Link login */}
-        <p className="login-link">
-          Si ya tienes tu cuenta <Link to="/login">Login</Link>
-        </p>
+        <button type="submit">Crear Usuario</button>
       </form>
-
-      {/* Footer */}
-      <footer>
-       {/*} <a href="#">Terms of Use</a> | <a href="#">Privacy</a>*/}
-      </footer>
     </div>
   );
 };
 
-export default Register;
+export default CreateUser;
