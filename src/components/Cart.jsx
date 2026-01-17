@@ -1,7 +1,19 @@
-function Cart({cart, removeFromCart, increaseQuantity, decreaseQuantity}){
+import { useCart } from "../context/CartContext";
+
+//Se modifica funcion Cart por uso global de CartContext.
+function Cart(){ 
+    const {
+        cart,
+        removeFromCart,
+        increaseQuantity,
+        decreaseQuantity
+    } = useCart();
+
     const total = cart.reduce(
-        (acc, item) => acc + item.price * item.quantity, 0
+        (acc, item) => acc + item.price * item.quantity,
+        0
     );
+
 
     return (
         <div style={{minWidth: "300px", padding: "20px", borderLeft: "1px solid #addd" }}>
@@ -35,5 +47,6 @@ function Cart({cart, removeFromCart, increaseQuantity, decreaseQuantity}){
         </div>
     );
 }
+
 
 export default Cart;
