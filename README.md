@@ -1,12 +1,64 @@
-# React + Vite
+# 🛒 Ecommerce React – Hito 2 | Desafío Latam
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto desarrollado como parte del **Hito 2** del programa **Desarrollo Frontend con React** de **Desafío Latam**.  
+El objetivo principal es aplicar los fundamentos de **React**, **React Router**, **props**, **hooks** y **renderización dinámica** en un contexto de ecommerce.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Descripción del proyecto
 
-## Expanding the ESLint configuration
+Este proyecto corresponde a una **aplicación Ecommerce** construida con **React + Vite**, que permite:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Navegar entre distintas vistas mediante rutas.
+- Visualizar productos renderizados dinámicamente desde archivos JSON.
+- Reutilizar componentes a través del uso de **props**.
+- Gestionar estado y efectos con **hooks de React**.
+- Simular roles de usuario (buyer, admin, sales) desde el frontend.
+
+---
+
+## 🎯 Objetivos del Hito 2
+
+- Crear un proyecto React desde cero usando `npx`.
+- Implementar navegación entre vistas usando **React Router**.
+- Reutilizar componentes utilizando **props**.
+- Aplicar **hooks** para manejar estado y ciclo de vida.
+- Mantener una estructura ordenada y escalable.
+
+---
+
+## 🧩 Tecnologías utilizadas
+
+- **React**
+- **Vite**
+- **React Router DOM**
+- **JavaScript (ES6+)**
+- **CSS**
+- **Bootstrap** (si aplica)
+- **JSON** (simulación de base de datos)
+
+---
+
+## 📂 Estructura del proyecto
+
+```bash
+src/
+│── components/
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── ProductCard.jsx
+│
+│── pages/
+│   ├── Home.jsx
+│   ├── Products.jsx
+│   ├── Login.jsx
+│
+│── context/
+│   └── AuthContext.jsx
+│
+│── data/
+│   ├── products.json
+│   └── users.json
+│
+│── App.jsx
+│── main.jsx
