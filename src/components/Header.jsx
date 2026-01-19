@@ -1,8 +1,5 @@
 /**
  * Header.jsx
- * ----------------------------------------------------------------------
- * Este componente representa el Header principal de la aplicación.
- *
  * COMPORTAMIENTO GENERAL:
  * - El menú de categorías (productos) SIEMPRE es visible.
  * - Si NO hay usuario logueado:
@@ -10,24 +7,6 @@
  *    - Se muestra el botón "Inicia sesión".
  *    - No se permite acceder a perfil, carrito ni historial.
  *
- * - Si HAY usuario logueado:
- *    - El menú cambia según el rol (admin / sales / buyer).
- *    - Se habilita:
- *        - Mi cuenta (perfil)
- *        - Carrito de compras
- *        - Historial de compras
- *        - Botón cerrar sesión
- *
- * DISEÑO:
- * - No se rompe el layout existente.
- * - El botón de logout aparece de forma natural y armónica.
- * - El header mantiene estabilidad visual.
- *
- * ESCALABILIDAD:
- * - Fácil agregar roles
- * - Fácil proteger rutas
- * - Compatible con backend y JWT
- * ----------------------------------------------------------------------
  */
 
 import { useState } from "react";
@@ -52,14 +31,11 @@ import { MENUS } from "../data/menus";
 import "../styles/Header.css";
 
 const Header = () => {
-  // 🔹 AUTENTICACIÓN
   const { user, logout } = useAuth();
 
-  // 🔹 UI STATE
   const [darkMode, setDarkMode] = useState(true);
   const [cartCount] = useState(0);
 
-  // 🔹 ROL ACTUAL (buyer por defecto)
   const role = user?.role || "buyer";
 
   return (
@@ -78,7 +54,7 @@ const Header = () => {
         <div className="header-inner">
           {/* LOGO */}
           <Link to="/" className="logo">
-            <strong>hipermundo</strong> 🍩
+            Compumundo<strong>hipermegared! </strong> 🍩
           </Link>
 
           {/* SEARCH (SE RESPETA TU COMENTARIO) */}
@@ -99,7 +75,7 @@ const Header = () => {
             {/* LOGIN / MI CUENTA */}
             <Nav.Link
               as={Link}
-              to={user ? "/profile" : "/login"}
+              to={user ? "/profile" : "/"}
               className="header-action"
             >
               <Person size={30} />

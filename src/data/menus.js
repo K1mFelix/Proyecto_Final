@@ -12,10 +12,10 @@ export const MENUS = {
   ],
 
   buyer: [
-    { label: "Gaming", icon: "🎮", path: "/products" },
-    { label: "Computación", icon: "💻", path: "/products" },
-    { label: "Componentes", icon: "🧩", path: "/products" },
-    { label: "Redes", icon: "📡", path: "/products" },
-    { label: "Hogar", icon: "🏠", path: "/products" },
+    { label: "Gaming", icon: "🎮", path: "/" },
+    { label: "Computación", icon: "💻", path: "/" },
+    { label: "Componentes", icon: "🧩", path: "/" },
+    { label: "Redes", icon: "📡", path: "/" },
+    { label: "Hogar", icon: "🏠", path: "/" },
   ],
 };
