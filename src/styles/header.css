@@ -142,3 +142,26 @@
     overflow-x: auto;
   }
 }
+
+/* =============================== */
+/* ESTILOS CARRITO EN HEADER */
+/* =============================== */
+.header-action {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  font-size: 0.7rem;
+  padding: 4px 6px;
+}
+.cart-badge {
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

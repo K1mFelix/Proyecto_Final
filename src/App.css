@@ -26,6 +26,20 @@ html, body {
   flex: 1;
 }
 
+body.dark {
+  background-color: #0f172a;
+  color: #e5e7eb;
+}
+
+body.light {
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* Links */
+body.dark a {
+  color: #e5e7eb;
+}
 
 
 /* ============================= */

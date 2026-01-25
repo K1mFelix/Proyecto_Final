@@ -1,5 +1,6 @@
 import { useCart } from "../context/CartContext"; //se agrega import de carrito global.
-import "./ProductCard.css";
+import "../styles/ProductsCard.css";
+
 
 //Se limpia ProductCard utilizando contexto global de carrito.
 function ProductCard({ product }) {

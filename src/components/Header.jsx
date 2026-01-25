@@ -28,13 +28,24 @@ import {
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { MENUS } from "../data/menus";
+import { useCart } from "../context/CartContext";
 import "../styles/Header.css";
+import { useEffect } from "react";
+
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const { cart } = useCart();
+  const cartCount = cart.length;    
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("theme") !== "light"
+  );
 
-  const [darkMode, setDarkMode] = useState(true);
-  const [cartCount] = useState(0);
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   const role = user?.role || "buyer";
 
@@ -44,8 +55,11 @@ const Header = () => {
       <div className={`top-bar ${darkMode ? "dark" : "light"}`}>
         <span>¡Retira GRATIS tus compras en nuestra tienda!</span>
 
-        <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? "🌙" : "☀️"}
+        <button
+          className="theme-toggle"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "☀️" : "🌙"}
         </button>
       </div>
 
@@ -72,25 +86,44 @@ const Header = () => {
 
           {/* ACTIONS */}
           <Nav className="header-actions">
+
+            {/* CARRITO*/}
+            {user && (
+              <Nav.Link
+                as={Link}
+                to="/cart"
+                className="header-action position-relative"
+                title="Ver carrito"
+              >
+                <Cart size={26} />
+                {cartCount > 0 && (
+                  <Badge pill bg="danger" className="cart-badge">
+                    {cartCount}
+                  </Badge>
+                )}
+              </Nav.Link>
+            )}
+
             {/* LOGIN / MI CUENTA */}
             <Nav.Link
-              as={Link}
-              to={user ? "/profile" : "/"}
-              className="header-action"
-            >
-              <Person size={30} />
-              <div className="user-text desktop-only">
-                <small>Hola! </small>
-                {user && (
-                  <div className="user-info">
-                    <small className="user-name">{user.nombres}</small> <br></br>
-                    <small className="user-role">{user.role}</small>
-                  </div>
-                )}
-                <strong>{user ? "Mi cuenta" : "Inicia sesión"}</strong>
-              </div>
-            </Nav.Link>
+    as={Link}
+    to={user ? "/profile" : "/login"}
+    className="header-action user-block"
+  >
+    <Person size={28} />
 
+    <div className="user-text desktop-only">
+      <small className="user-greeting">Hola{user && ","}</small>
+
+      {user && (
+        <span className="user-name">{user.nombres}</span>
+      )}
+
+      <strong className="account-text">
+        {user ? "Mi cuenta" : "Inicia sesión"}
+      </strong>
+    </div>
+  </Nav.Link>
             {/* HISTORIAL (SOLO LOGUEADO) */}
             {user  && (
               <Nav.Link
@@ -99,22 +132,6 @@ const Header = () => {
                 className="header-action desktop-only"
               >
                 <ClockHistory size={22} />
-              </Nav.Link>
-            )}
-
-            {/* CART (SOLO LOGUEADO) */}
-            {user  && (
-              <Nav.Link
-                as={Link}
-                to="/cart"
-                className="header-action position-relative"
-              >
-                <Cart size={26} />
-                {cartCount > 0 && (
-                  <Badge pill bg="danger" className="cart-badge">
-                    {cartCount}
-                  </Badge>
-                )}
               </Nav.Link>
             )}
 
